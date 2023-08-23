@@ -1,0 +1,104 @@
+
+body {
+    min-height: 100%;
+    margin: 0;
+}
+
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.Mainbox{
+    border: 1px black solid;
+    height: 80vh;
+    width: 90vh;
+    background-color: aquamarine;
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    grid-template-rows: auto auto auto auto auto;
+    background-color: antiquewhite;
+}
+
+.minibox{
+    border: 1px black solid;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+/* Text Style */
+.text{
+    font-size: x-large;
+    font-family: sans-serif;
+}
+
+.white-text{
+    color: white;
+}
+
+.black-text{
+    color: black;
+}
+
+
+/* color box */
+.yellow-box{
+    background-color: yellow;
+}
+
+.black-box{
+    background-color: black;
+    grid-area: 1/2/2/5;
+}
+
+.green-box{
+    background-color: green;
+}
+
+.coklat-box{
+    background-color: brown;
+}
+
+.pink-box{
+    background-color: pink;
+    grid-area: 2/3/4/3;
+}
+
+.red-box{
+    background-color: red;
+}
+
+.oldblue-box{
+    background-color: blue;
+    grid-area: 4/1/7/2;
+}
+
+.blue-box{
+    background-color: aqua;
+    grid-area: 2/4/3/5;
+}
+
+.white-box{
+    background-color: white;
+    
+}
+
+.grey-box{
+    background-color: gray;
+    grid-area: 4/2/6/4;
+}
+
+.purple-box{
+    background-color: blueviolet;
+    grid-area: 3/4/7/5;
+}
+
+.orange-box{
+    background-color: orange;
+    grid-area: 6/2/7/4;
+}
+
