@@ -163,54 +163,45 @@ function decreaseQuantity(index) {
   function tambahBarang(index) {
     // Dapatkan produk yang akan ditambahkan ke keranjang
     let selectedProduct = product[index];
-  
-    // Cek apakah produk ini sudah ada di keranjang
-    let existingCartItem = list_cart.find(item => item.id_barang === selectedProduct.id_barang);
-  
-    if (existingCartItem) {
-      // Jika produk sudah ada di keranjang, tambahkan jumlah dan total harga
-      existingCartItem.jumlah_barang++;
-      existingCartItem.total_harga = existingCartItem.jumlah_barang * existingCartItem.price;
-    } else {
-      // Jika produk belum ada di keranjang, tambahkan produk baru
-      let newItem = {
+      if(selectedProduct.jumlah != 0){
+        let newItem = {
         id_barang: selectedProduct.id_barang,
         title: selectedProduct.title,
         price: selectedProduct.price,
         jumlah_barang: selectedProduct.jumlah,
-        total_harga: selectedProduct.price, // Total harga awal
-      };
+        total_harga: selectedProduct.price * selectedProduct.jumlah, // Total harga awal
+          };
       list_cart.push(newItem);
-    }
-    
-    // Perbarui tampilan keranjang
+      }
+
     renderCart();
     hitungTotalBayar();
     
   }
   
   function hitungTotalBayar() {
-    // Memeriksa apakah elemen-elemen yang dibutuhkan ada
+    // Hitung total harga semua barang dalam keranjang
+    let totalHarga = list_cart.reduce((total, cart) => total + cart.total_harga, 0);
+  
+    // Hitung pajak (11% dari total harga)
+    let pajak = (11 / 100) * totalHarga;
+  
+    // Hitung total bayar (total harga + pajak)
+    let totalBayar = totalHarga + pajak;
+  
+    // Perbarui tampilan total pembelian, pajak, dan total bayar
     let totalPembelianCell = document.getElementById("totalPembelian");
     let pajakCell = document.getElementById("pajak");
     let totalBayarCell = document.getElementById("totalBayar");
   
     if (totalPembelianCell && pajakCell && totalBayarCell) {
-      // Hitung total harga semua barang dalam keranjang
-      let totalHarga = list_cart.reduce((total, cart) => total + cart.total_harga, 0);
-  
-      // Hitung pajak (11% dari total harga)
-      let pajak = (11 / 100) * totalHarga;
-  
-      // Hitung total bayar (total harga + pajak)
-      let totalBayar = totalHarga + pajak;
-  
-      // Perbarui tampilan total pembelian, pajak, dan total bayar
-      totalPembelianCell.querySelector("td:nth-child(5)").textContent = `Rp. ${totalHarga}`;
-      pajakCell.querySelector("td:nth-child(5)").textContent = `Rp. ${pajak}`;
-      totalBayarCell.querySelector("td:nth-child(5)").textContent = `Rp. ${totalBayar}`;
+      totalPembelianCell.textContent = `Total Harga : Rp. ${totalHarga}`;
+      pajakCell.textContent = `Pajak : Rp. ${pajak}`;
+      totalBayarCell.textContent = `Total Bayar : Rp. ${totalBayar}`;
     }
   }
+  
+  
   
   
 // Fungsi untuk memperbarui tampilan jumlah di tombol "Middle"
@@ -240,6 +231,3 @@ product.forEach(function (product, index) {
     let productCard = createProductCard(product, index);
     productContainer.appendChild(productCard);
   });
-
-  renderCart();
-  hitungTotalBayar();
